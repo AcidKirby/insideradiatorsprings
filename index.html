@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cars Story Spots</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a href="#" class="logo">Cars Story Spots</a>
+    <nav>
+      <a href="#spots">Spots</a>
+      <a href="#ar">AR</a>
+      <a href="#reflectie">Reflectie</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="video-bg">
+        <iframe
+          src="https://www.youtube.com/embed/SbXIj2T-_uk?controls=1&rel=0&modestbranding=1"
+          title="Official Trailer: Cars"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="eyebrow">Interactive AR story experience</p>
+        <h1>Reis langs de iconische plekken uit de wereld van Cars</h1>
+        <p>
+          Ontdek Radiator Springs, Route 66 en andere verhaalplekken via sfeer,
+          korte hoofdstukken en een 3D/AR moment.
+        </p>
+        <a href="#spots" class="button">Start de roadtrip</a>
+      </div>
+    </section>
+
+    <section class="intro section">
+      <p class="eyebrow">Concept</p>
+      <h2>Geen gewone informatieve site, maar een digitale roadtrip.</h2>
+      <p>
+        De website neemt de gebruiker stap voor stap mee langs bekende Cars-spots.
+        Elke locatie voelt als een hoofdstuk met beeld, tekst, sfeer en een AR-laag.
+      </p>
+    </section>
+
+    <section id="spots" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Story spots</p>
+        <h2>Kies je volgende stop</h2>
+      </div>
+
+      <div class="spot-grid">
+        <article class="spot-card">
+          <span class="number">01</span>
+          <h3>Radiator Springs</h3>
+          <p>Het warme hart van de route. Hier draait het verhaal om rust, vriendschap en opnieuw kijken naar wat belangrijk is.</p>
+          <a href="#ar">Bekijk AR moment</a>
+        </article>
+
+        <article class="spot-card">
+          <span class="number">02</span>
+          <h3>Flo’s V8 Café</h3>
+          <p>Een retro neon-stop vol sfeer, kleur en herkenning. Ideaal voor een interactieve overlay met licht en geluid.</p>
+          <a href="#ar">Bekijk AR moment</a>
+        </article>
+
+        <article class="spot-card">
+          <span class="number">03</span>
+          <h3>Willy’s Butte</h3>
+          <p>Een dramatische woestijnlocatie waar snelheid, zand en filmische compositie centraal staan.</p>
+          <a href="#ar">Bekijk AR moment</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="ar" class="section ar-section">
+      <div>
+        <p class="eyebrow">AR prototype</p>
+        <h2>3D object als interactieve laag</h2>
+        <p>
+          Dit blok gebruikt <code>&lt;model-viewer&gt;</code>. Op geschikte mobiele apparaten verschijnt
+          een AR-knop. Vervang later het voorbeeldmodel door je eigen .glb-bestand, bijvoorbeeld een
+          zelfgemaakt low-poly raceauto-object.
+        </p>
+        <div class="note">
+          Zet je eigen model in een map <strong>models</strong> en verander de src naar:
+          <code>models/jouw-model.glb</code>
+        </div>
+      </div>
+
+      <model-viewer
+        class="model"
+        src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+        alt="3D model voor AR prototype"
+        ar
+        ar-modes="webxr scene-viewer quick-look"
+        camera-controls
+        auto-rotate
+        shadow-intensity="1">
+        <button slot="ar-button" class="button ar-button">Open in AR</button>
+      </model-viewer>
+    </section>
+
+    <section id="reflectie" class="section reflection">
+      <p class="eyebrow">Voor je datapunt</p>
+      <h2>Wat je hiermee kunt onderbouwen</h2>
+      <div class="reflection-grid">
+        <div>
+          <h3>UX</h3>
+          <p>De flow is duidelijk: intro → locaties → AR-moment → reflectie.</p>
+        </div>
+        <div>
+          <h3>UI</h3>
+          <p>De stijl gebruikt woestijntinten, Route 66-sfeer, retro vormen en filmische contrasten.</p>
+        </div>
+        <div>
+          <h3>Concept</h3>
+          <p>De gebruiker ontdekt locaties niet als losse informatie, maar als hoofdstukken van een verhaal.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Cars Story Spots — individueel AR prototype</p>
+    <p class="small">Fan concept voor schoolproject. Niet officieel verbonden aan Disney/Pixar.</p>
+  </footer>
+</body>
+</html>
