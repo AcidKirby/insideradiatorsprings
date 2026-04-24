@@ -245,10 +245,52 @@
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
-  let player;
-  let soundOn = false;
+ let player;
+let soundOn = false;
 
-  let music = document.getElementById("bgMusic");
+const music = document.getElementById("bgMusic");
+const musicStartTime = 48;
+let musicStarted = false;
+let fadeInterval;
+
+function fadeAudio(audio, targetVolume, duration = 900, onDone) {
+  clearInterval(fadeInterval);
+
+  const steps = 30;
+  const startVolume = audio.volume;
+  const volumeChange = targetVolume - startVolume;
+  let currentStep = 0;
+
+  fadeInterval = setInterval(() => {
+    currentStep++;
+    audio.volume = Math.max(0, Math.min(1, startVolume + (volumeChange * currentStep) / steps));
+
+    if (currentStep >= steps) {
+      clearInterval(fadeInterval);
+      audio.volume = targetVolume;
+      if (onDone) onDone();
+    }
+  }, duration / steps);
+}
+
+function fadeMusicIn() {
+  if (!musicStarted) {
+    music.currentTime = musicStartTime;
+    musicStarted = true;
+  }
+
+  music.volume = 0;
+  music.play().then(() => {
+    fadeAudio(music, 1, 1200);
+  }).catch(() => {});
+}
+
+function fadeMusicOut() {
+  fadeAudio(music, 0, 900, () => {
+    music.pause();
+  });
+}
+
 
   function onYouTubeIframeAPIReady() {
     player = new YT.Player("ytvideo", {
@@ -284,21 +326,21 @@
  document.getElementById("soundBtn").addEventListener("click", function () {
   if (!player) return;
 
+  const hero = document.querySelector(".hero");
+  const heroBottom = hero.offsetTop + hero.offsetHeight;
+  const isPastHero = window.scrollY > heroBottom - 120;
+
   if (soundOn) {
     player.mute();
-    music.pause();
+    fadeMusicOut();
     this.textContent = "🔇 Geluid Uit";
     soundOn = false;
-
   } else {
     player.unMute();
     player.playVideo();
 
-    const hero = document.querySelector(".hero");
-    const heroBottom = hero.offsetTop + hero.offsetHeight;
-
-    if (window.scrollY > heroBottom - 120) {
-      music.play().catch(() => {});
+    if (isPastHero) {
+      fadeMusicIn();
     }
 
     this.textContent = "🔊 Geluid Aan";
@@ -311,25 +353,25 @@
 
   const hero = document.querySelector(".hero");
   const heroBottom = hero.offsetTop + hero.offsetHeight;
+  const isPastHero = window.scrollY > heroBottom - 120;
 
-  if (window.scrollY > heroBottom - 120) {
+  if (isPastHero) {
     player.pauseVideo();
-    if (soundOn) {
-    
-      music.play().catch(() => {});
-    }
 
+    if (soundOn && music.paused) {
+      fadeMusicIn();
+    }
   } else {
     player.playVideo();
 
-    music.pause();
-    music.currentTime = 48;
+    if (!music.paused) {
+      fadeMusicOut();
+    }
 
     if (!soundOn) {
       player.mute();
     }
   }
-  
 });
 
  const observer = new IntersectionObserver(entries => {
