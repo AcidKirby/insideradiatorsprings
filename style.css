@@ -1073,6 +1073,10 @@ footer {
   border: 0;
 }
 
+.ar-main-btn {
+  display: none !important;
+}
+
 @media (max-width: 850px) {
   .video-bg iframe,
   .video-bg #ytvideo {
@@ -1081,11 +1085,21 @@ footer {
     min-width: 220vw !important;
     min-height: 125vh !important;
   }
-   .ar-main-btn {
-    display: inline-block;
+
+  .ar-main-btn {
+    display: inline-block !important;
   }
 }
 
-.ar-main-btn {
-  display: none;
+.ar-note {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.6);
+  margin-top: 10px;
+  text-align: center;
+}
+
+@media (max-width: 850px) {
+  .ar-note {
+    display: none;
+  }
 }
